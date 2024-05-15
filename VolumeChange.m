@@ -28,7 +28,7 @@ function Specific(Volume_Factor, In_Path, Out_Path)
   cd(workingDirectory);
 
   audio = audioread(In_Path);
-  sample_rate = audioinfo("Audios/Default.wav").SampleRate;
+  sample_rate = audioinfo(In_Path).SampleRate;
 
   edited_audio = audio * Volume_Factor;
 
