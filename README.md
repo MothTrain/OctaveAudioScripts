@@ -43,6 +43,23 @@ and the *out* file is Out/VolumeIncrease.wav. It is the equivalent to calling
 Increases or decreases the volume by *volume_factor*. A volume_factor of 0.5 will half
 the audio amplitude and 2 will double the amplitude.
 
-`volume_factor` - Coefficient of volume change. <br>
+`Volume_Factor` - Coefficient of volume change. <br>
+`In_Path` - The path of the audio file to read from/edit <br>
+`Out_Path` - The path of the file to write edited audio to
+
+
+### AddEcho (*Depth, Delay*)
+Adds an echo effect onto audio read from *Audios/Default.wav* and written to *Out/EchoAdded.wav*. The audio will have added repetitions of itself quieter
+by a coefficient of *Depth* and will be repeated at intervals spaced *Delay* seconds apart
+
+`Depth` - How much quieter should each echo be than the previous <br>
+`Delay` - How far echos should be "spaced out"
+
+### AddEcho (*Depth, Delay, In_Path, Out_Path*)
+Adds an echo effect onto audio. The audio will have added repetitions of itself quieter
+by a coefficient of *Depth* and will be repeated at intervals spaced *Delay* seconds apart
+
+`Depth` - How much quieter should each echo be than the previous <br>
+`Delay` - How far echos should be "spaced out" <br>
 `In_Path` - The path of the audio file to read from/edit <br>
 `Out_Path` - The path of the file to write edited audio to
