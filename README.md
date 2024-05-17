@@ -1,7 +1,7 @@
 # Octave Audio Scripts
 
 The octave audio scripts is a collection of scripts for [GNU Octave](https://octave.org/) 
-that demonstrate 
+that demonstrate different DSP (Digital Signal Processing) concepts
 
 # Requirements
 
@@ -78,7 +78,7 @@ A diagram showing how the Moving Average LPF behaves on a vector. Envelope_Size 
 
 We can see below how the Moving Average LPF effectively filters a 500Hz signal buried in noise (Middle), creating
 a clearer signal (Bottom) without a significant loss in amplitude, compared to the original sinusoid with no noise added (Top) <br>
-![Original Sinusoid (Top), Original+Noise (Middle), Denoised sinusoid (Bottom)](DocImages\FilteringDemoMovingAverage.png)
+![Original Sinusoid (Top), Original+Noise (Middle), Denoised sinusoid (Bottom)](DocImages/FilteringDemoMovingAverage.png)
 
 
 However, the moving average filter is flawed because of its disproporsionate attenuation of different frequncies. This is an inherent flaw with
