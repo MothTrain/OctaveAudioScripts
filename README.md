@@ -53,10 +53,21 @@ A convenience function for AddEcho(*Depth, Delay, In_Path, Out_Path*). Equivalen
 AddEcho (*Depth, Delay, "Audios/Default.wav", "Out/EchoAdded.wav")
 
 ### AddEcho (*Depth, Delay, In_Path, Out_Path*)
-Adds an echo effect onto audio. The audio will have added repetitions of itself quieter
-by a coefficient of *Depth* and will be repeated at intervals spaced *Delay* seconds apart
+Adds an echo effect onto audio by repeating itself, quieter and later in time. 
 
-`Depth` - How much quieter should each echo be than the previous <br>
+![Echo Representation](DocImages/EchoDiagram.png)
+A visual representation of how the echo function works. Depth = 0.5 and audio is shifting
+2 samples forward.
+
+This is done by creating a copy of the vector representing audio.
+Padding the start of the vector copy with zeros, shifting it forward.
+The number of samples to shift forward, which we will call *X*, is calculated by:
+Sample Rate x *Delay*. The new vector is then multiplied by *Depth* to make it quieter.
+This new vector now represents the first echo you hear. This process is then repeated 
+on the new vector to form the second echo vector. 
+A more visual representation is above.
+
+`Depth` - How much quieter should each echo be than the previous<br>
 `Delay` - How far echos should be "spaced out" <br>
 `In_Path` - The path of the audio file to read from/edit <br>
 `Out_Path` - The path of the file to write edited audio to
@@ -67,14 +78,14 @@ A convenience function for MovingAverageLPF(*Envelope_Size, In_Path, Out_Path*).
 Equivalent of calling MovingAverageLPF(*Envelope_Size, "Audios/Default.wav", "Out/MovingAverageLPF.wav"*).
 
 ### MovingAverageLPF(*Envelope_Size, In_Path, Out_Path*)
-A Moving average, Finite Impulse Response. Low Pass filter for audio.<br> It
-uses an unweighted convolution that takes the mean of an envelope of samples, creating a new sample.
+A Moving average, Finite Impulse Response. Low Pass filter for audio.<br> 
+It uses an unweighted convolution that takes the mean of an envelope of samples, creating a new sample.
 The envelope has a size of *Envelope_Size*. At the beginning of its convolution, 
 where it does not have enough data for the full envelope, it performs and average on the data it has. This is
 to prevent the start of the input from being truncated (See diagram below). 
 
 ![Diagram of Moving Average Convolution](DocImages/MovingAverage.gif) <br>
-A diagram showing how the Moving Average LPF behaves on a vector. Envelope_Size = 4
+A diagram showing how the Moving Average LPF behaves on a vector that represents audio. Envelope_Size = 4
 
 We can see below how the Moving Average LPF effectively filters a 500Hz signal buried in noise (Middle), creating
 a clearer signal (Bottom) without a significant loss in amplitude, compared to the original sinusoid with no noise added (Top) <br>
@@ -82,7 +93,7 @@ a clearer signal (Bottom) without a significant loss in amplitude, compared to t
 
 
 However, the moving average filter is flawed because of its disproporsionate attenuation of different frequncies. This is an inherent flaw with
-moving average signals.
+moving average filters.
 
 When white noise (Left) is passed through, our filter's disproporsionate nature is shown as 'troughs' of attenuated frequencies (Right). <br> *Note that the scale is not the same on the diagrams* <br>
 <img src="DocImages/WhiteNoiseSpectrogram.png" alt="drawing" width="200">
